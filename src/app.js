@@ -4,20 +4,18 @@ import globalCss from "./style.css";
 import styles, { stylesheet } from "./style.module.css";
 
 export function getGreetings() {
-  const 价格 = document.querySelector(
-    "#mod-detail-price > div > table > tbody td.ladder-3-1 > span.value.price-length-5"
-  ).textContent;
+  const itemInfo = ((obj) =>
+    function () {
+      return {
+        价格: this.refPrice,
+        起批量: this.beginAmount,
+        运费: 6,
+      };
+    }.apply(obj))(iDetailConfig);
 
-  const 起批量 = document.querySelector(
-    "#mod-detail-price > div > table > tbody > tr.amount > td.ladder-3-1 > span.value"
-  ).textContent;
+  const { 价格, 起批量, 运费 } = itemInfo;
 
-  const 运费 = document.querySelector(
-    "#mod-detail-bd .cost-entries-type p:nth-child(2)>em"
-  );
-
-  // const 平均单价 = (价格 * `${起批量.match(/\d+/)[0]}` + 运费) / 起批量;
-  const 平均单价 = 5;
+  const 平均单价 = (价格 * 起批量 + 运费) / 起批量;
 
   return (
     <>
